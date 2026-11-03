@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Smart Library</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EEF3F7;--surface:#fff;--ink:#12263A;--muted:#5B6B7B;--accent:#0B7A75;--on-accent:#fff;--line:#D5DEE6;--ok:#0B7A75;--okbg:#DDF3F1;--warn:#8A5300;--warnbg:#FCEBCB;--bad:#B42318;--badbg:#FBE1DE;--neu:#34506B;--neubg:#E1EAF2;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0E1A24;--surface:#15242F;--ink:#E6EEF4;--muted:#93A4B3;--accent:#3CC2B9;--on-accent:#06201F;--line:#263847;--ok:#5FE0D6;--okbg:#10393A;--warn:#F5C26B;--warnbg:#41300F;--bad:#FF9D92;--badbg:#45201C;--neu:#A9C3DC;--neubg:#1F3345;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0E1A24;--surface:#15242F;--ink:#E6EEF4;--muted:#93A4B3;--accent:#3CC2B9;--on-accent:#06201F;--line:#263847;--ok:#5FE0D6;--okbg:#10393A;--warn:#F5C26B;--warnbg:#41300F;--bad:#FF9D92;--badbg:#45201C;--neu:#A9C3DC;--neubg:#1F3345;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px 48px}
+header{display:flex;align-items:center;gap:16px;padding:16px 0 8px;flex-wrap:wrap}
+.brand{font-weight:800;font-size:1.25rem;letter-spacing:-.02em;margin-right:auto}
+nav{display:flex;gap:4px;overflow-x:auto;max-width:100%;padding:4px;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+nav button{border:0;background:none;color:var(--muted);font:600 .9rem inherit;font-family:inherit;padding:8px 12px;border-radius:8px;cursor:pointer;white-space:nowrap}
+nav button.on{background:var(--accent);color:var(--on-accent)}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+h1,h2,h3{letter-spacing:-.02em;line-height:1.15;margin:0}
+h2{font-size:1.5rem;margin:24px 0 12px}h3{font-size:1.05rem;margin-bottom:8px}
+.hero{padding:40px 0 24px}
+.hero h1{font-size:clamp(2.1rem,7vw,3.9rem);font-weight:800;max-width:14ch;letter-spacing:-.035em}
+.hero p{color:var(--muted);max-width:52ch;margin:12px 0 20px}
+.sbar{display:flex;gap:8px;flex-wrap:wrap}
+input,select{font:inherit;color:var(--ink);background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:11px 14px;min-width:0}
+.sbar input{flex:1 1 260px;font-size:1.1rem;padding:15px 18px;border-radius:14px}
+.btn{font:600 .95rem inherit;font-family:inherit;background:var(--accent);color:var(--on-accent);border:0;border-radius:10px;padding:11px 18px;cursor:pointer}
+.btn.alt{background:var(--neubg);color:var(--neu)}.btn.sm{padding:6px 12px;font-size:.85rem}
+.btn.danger{background:var(--badbg);color:var(--bad)}.btn.arm{background:var(--bad);color:#fff}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:8px 0 8px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.stat b{display:block;font-size:1.9rem;line-height:1.1;font-weight:800}.stat span{color:var(--muted);font-size:.88rem}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}.chip{border:1.5px solid var(--line);background:none;color:var(--ink);font:600 .88rem inherit;font-family:inherit;padding:6px 12px;border-radius:99px;cursor:pointer}
+.ctrl{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.ctrl input{flex:1 1 240px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.card{text-align:left;font:inherit;color:inherit;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;display:flex;flex-direction:column;gap:4px}
+.card:hover{border-color:var(--accent)}.card strong{font-size:1.02rem;line-height:1.25}.card small{color:var(--muted)}
+.badge{display:inline-block;font-size:.78rem;font-weight:600;padding:2px 10px;border-radius:99px;width:fit-content;margin-top:6px}
+.ok{background:var(--okbg);color:var(--ok)}.warn{background:var(--warnbg);color:var(--warn)}.bad{background:var(--badbg);color:var(--bad)}.neutral{background:var(--neubg);color:var(--neu)}
+.tw{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:14px}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);white-space:nowrap}th{color:var(--muted);font-weight:600}tr:last-child td{border-bottom:0}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;align-items:end;margin-bottom:8px}
+label{display:flex;flex-direction:column;gap:4px;font-weight:600;font-size:.88rem}label input,label select{font-weight:400}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.tabs .chip.on{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.empty{padding:28px;text-align:center;color:var(--muted)}
+dialog{border:1px solid var(--line);border-radius:16px;background:var(--surface);color:var(--ink);padding:22px;width:min(440px,92vw)}
+dialog::backdrop{background:rgba(5,15,25,.55)}
+dialog dl{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:14px 0}dialog dt{color:var(--muted)}dialog dd{margin:0}
+dialog .form{grid-template-columns:1fr}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:10px;font-weight:600;font-size:.92rem;opacity:0;pointer-events:none;transition:opacity .2s;max-width:90vw;z-index:20}
+#toast.show{opacity:1}
+@media (prefers-reduced-motion:reduce){#toast{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div class="brand">Smart Library</div><nav id="nav" aria-label="Menu utama"></nav></header>
+<main id="main"></main>
+</div>
+<dialog id="dlg"></dialog>
+<div id="toast" role="status"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+const KEY='smartlib-v1',DENDA=1000,MAXPIN=3;
+const $=(s,r=document)=>r.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const iso=d=>d.toISOString().slice(0,10),today=()=>iso(new Date());
+const plus=n=>{const d=new Date();d.setDate(d.getDate()+n);return iso(d)};
+const days=(a,b)=>Math.round((new Date(b)-new Date(a))/864e5);
+const fmtD=s=>s?new Date(s).toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'}):'-';
+const rp=n=>'Rp'+n.toLocaleString('id-ID');
+const nid=(a,p)=>p+String(Math.max(0,...a.map(x=>+String(x.id).slice(1)||0))+1).padStart(3,'0');
+let db,state={view:'home',q:'',cat:'',pre:'',mq:'',rf:'all',adm:false,tab:'books'};
+const V=[['home','Beranda'],['katalog','Katalog'],['pinjam','Peminjaman'],['kembali','Pengembalian'],['anggota','Anggota'],['laporan','Laporan'],['admin','Admin']];
+
+function seed(){return{pin:'1234',
+books:[['Laskar Pelangi','Andrea Hirata','Novel',2005,3],['Bumi Manusia','Pramoedya Ananta Toer','Novel',1980,2],['Matematika Kelas X','Kemendikbud','Pelajaran',2021,5],['IPA Terpadu','Tim Penyusun','Pelajaran',2020,4],['Atomic Habits','James Clear','Pengembangan Diri',2018,2],['Sejarah Indonesia','Tim Penyusun','Sejarah',2019,3],['Ensiklopedia Sains','Tim Penyusun','Referensi',2017,1],['Pemrograman Dasar','Rinaldi Munir','Komputer',2016,2]].map((b,i)=>({id:'B'+String(i+1).padStart(3,'0'),judul:b[0],penulis:b[1],kategori:b[2],tahun:b[3],stok:b[4]})),
+members:[['Aisyah Putri','X-1','0812-1111-0001'],['Budi Santoso','X-2','0812-1111-0002'],['Citra Lestari','XI-IPA1','0812-1111-0003'],['Dimas Pratama','XII-IPS2','0812-1111-0004']].map((m,i)=>({id:'A'+String(i+1).padStart(3,'0'),nama:m[0],kelas:m[1],kontak:m[2]})),
+loans:[{id:'T001',book:'B001',mem:'A001',out:plus(-10),due:plus(-3),ret:null},{id:'T002',book:'B005',mem:'A002',out:plus(-2),due:plus(5),ret:null},{id:'T003',book:'B003',mem:'A003',out:plus(-14),due:plus(-7),ret:plus(-8)}]}}
+function load(){try{const r=localStorage.getItem(KEY);if(r)return JSON.parse(r)}catch(e){}return seed()}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(db))}catch(e){}}
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('show'),2600)}
+
+const active=id=>db.loans.filter(l=>l.book===id&&!l.ret).length;
+const avail=b=>b.stok-active(b.id);
+const late=l=>!l.ret&&l.due<today();
+const fine=l=>Math.max(0,days(l.due,l.ret||today()))*DENDA;
+const bk=id=>db.books.find(b=>b.id===id)||{judul:'(buku dihapus)',stok:0,id};
+const mm=id=>db.members.find(m=>m.id===id)||{nama:'(anggota dihapus)'};
+const cats=()=>[...new Set(db.books.map(b=>b.kategori))].sort();
+function st(l){if(l.ret)return['Dikembalikan','ok'];if(late(l))return['Terlambat '+days(l.due,today())+' hari','bad'];return['Dipinjam','neutral']}
+const badge=l=>{const[t,c]=st(l);return`<span class="badge ${c}" style="margin:0">${t}</span>`};
+const empty=t=>`<div class="empty">${t}</div>`;
+const tbl=(h,rows,msg)=>rows.length?`<div class="tw"><table><thead><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>${rows.join('')}</tbody></table></div>`:empty(msg);
+
+/* ---------- Tampilan ---------- */
+const views={
+home(){const act=db.loans.filter(l=>!l.ret),lt=act.filter(late);
+return`<section class="hero"><h1>Mau baca apa hari ini?</h1><p>Cari koleksi perpustakaan sekolah, cek ketersediaannya, lalu pinjam di meja petugas.</p>
+<div class="sbar"><input id="hq" placeholder="Cari judul, penulis, atau kategori" aria-label="Cari buku"><button class="btn" data-act="gosearch">Cari buku</button></div></section>
+<div class="stats"><div class="stat"><b>${db.books.length}</b><span>Judul buku</span></div><div class="stat"><b>${db.books.reduce((s,b)=>s+avail(b),0)}</b><span>Eksemplar tersedia</span></div><div class="stat"><b>${act.length}</b><span>Sedang dipinjam</span></div><div class="stat"><b>${lt.length}</b><span>Terlambat</span></div></div>
+<div class="cols" style="margin-top:16px"><div class="panel"><h3>Kategori koleksi</h3><div class="chips">${cats().map(c=>`<button class="chip" data-act="cat" data-id="${esc(c)}">${esc(c)}</button>`).join('')||'Belum ada kategori.'}</div></div>
+<div class="panel"><h3>Peminjaman terbaru</h3>${act.length?act.slice(-5).reverse().map(l=>`<div style="display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--line)"><span>${esc(bk(l.book).judul)}<br><small style="color:var(--muted)">${esc(mm(l.mem).nama)}</small></span>${badge(l)}</div>`).join(''):empty('Belum ada buku yang dipinjam.')}</div></div>`},
+
+katalog(){return`<h2>Katalog buku</h2><div class="ctrl"><input id="cq" value="${esc(state.q)}" placeholder="Cari berdasarkan judul, penulis, atau kategori" aria-label="Cari buku" oninput="state.q=this.value;$('#list').innerHTML=cards()">
+<select id="cc" aria-label="Kategori" onchange="state.cat=this.value;$('#list').innerHTML=cards()"><option value="">Semua kategori</option>${cats().map(c=>`<option ${c===state.cat?'selected':''}>${esc(c)}</option>`).join('')}</select></div><div id="list">${cards()}</div>`},
+
+pinjam(){const free=db.books.filter(b=>avail(b)>0);
+return`<h2>Peminjaman buku</h2><div class="panel"><div class="form">
+<label>Anggota<select id="pm"><option value="">Pilih anggota</option>${db.members.map(m=>`<option value="${m.id}">${esc(m.nama)} (${esc(m.kelas)})</option>`).join('')}</select></label>
+<label>Buku tersedia<select id="pb"><option value="">Pilih buku</option>${free.map(b=>`<option value="${b.id}" ${b.id===state.pre?'selected':''}>${esc(b.judul)} (sisa ${avail(b)})</option>`).join('')}</select></label>
+<label>Jatuh tempo<input id="pd" type="date" value="${plus(7)}" min="${today()}"></label>
+<button class="btn" data-act="pinjam">Catat peminjaman</button></div><small style="color:var(--muted)">Maksimal ${MAXPIN} buku per anggota. Denda keterlambatan ${rp(DENDA)} per hari.</small></div>
+<h2>Sedang dipinjam</h2>${actTable(false)}`},
+
+kembali(){return`<h2>Pengembalian buku</h2>${actTable(true)}`},
+
+anggota(){return`<h2>Data anggota</h2><div class="ctrl"><input value="${esc(state.mq)}" placeholder="Cari nama atau kelas" aria-label="Cari anggota" oninput="state.mq=this.value;$('#list').innerHTML=memRows()"></div><div id="list">${memRows()}</div>`},
+
+laporan(){const L=db.loans,ak=L.filter(l=>!l.ret),f=L.filter(l=>state.rf==='all'||(state.rf==='act'&&!l.ret)||(state.rf==='late'&&late(l))||(state.rf==='done'&&l.ret));
+const tot=L.reduce((s,l)=>s+fine(l),0);
+return`<h2>Laporan</h2><div class="stats"><div class="stat"><b>${db.books.length}</b><span>Judul buku</span></div><div class="stat"><b>${db.books.reduce((s,b)=>s+(+b.stok||0),0)}</b><span>Total eksemplar</span></div><div class="stat"><b>${db.members.length}</b><span>Anggota</span></div><div class="stat"><b>${L.length}</b><span>Total transaksi</span></div><div class="stat"><b>${ak.filter(late).length}</b><span>Terlambat</span></div><div class="stat"><b>${rp(tot)}</b><span>Denda (berjalan + selesai)</span></div></div>
+<div class="row" style="margin-top:16px"><button class="btn" data-act="xlsx">Unduh laporan Excel</button></div>
+<h3>Koleksi per kategori</h3>${tbl(['Kategori','Judul','Eksemplar','Dipinjam'],cats().map(c=>{const bs=db.books.filter(b=>b.kategori===c);return`<tr><td>${esc(c)}</td><td>${bs.length}</td><td>${bs.reduce((s,b)=>s+(+b.stok||0),0)}</td><td>${bs.reduce((s,b)=>s+active(b.id),0)}</td></tr>`}),'Belum ada koleksi.')}
+<div class="row" style="margin-top:24px"><h3 style="margin:0">Riwayat transaksi</h3><select aria-label="Filter transaksi" onchange="state.rf=this.value;render()">${[['all','Semua'],['act','Sedang dipinjam'],['late','Terlambat'],['done','Dikembalikan']].map(o=>`<option value="${o[0]}" ${state.rf===o[0]?'selected':''}>${o[1]}</option>`).join('')}</select></div>
+${tbl(['ID','Buku','Anggota','Pinjam','Jatuh tempo','Kembali','Status','Denda'],f.slice().reverse().map(l=>`<tr><td>${l.id}</td><td>${esc(bk(l.book).judul)}</td><td>${esc(mm(l.mem).nama)}</td><td>${fmtD(l.out)}</td><td>${fmtD(l.due)}</td><td>${fmtD(l.ret)}</td><td>${badge(l)}</td><td>${rp(fine(l))}</td></tr>`),'Tidak ada transaksi untuk filter ini.')}`},
+
+admin(){if(!state.adm)return`<h2>Admin</h2><div class="panel" style="max-width:380px"><div class="form"><label>PIN admin<input id="pin" type="password" inputmode="numeric" autocomplete="off"></label><button class="btn" data-act="login">Masuk</button></div><small style="color:var(--muted)">PIN awal: 1234. Ganti di tab Data dan Excel setelah masuk.</small></div>`;
+const T=[['books','Buku'],['members','Anggota'],['loans','Transaksi'],['data','Data dan Excel']];
+let body='';
+if(state.tab==='books')body=`<div class="row"><button class="btn" data-act="edit" data-id="books:">Tambah buku</button></div>`+tbl(['ID','Judul','Penulis','Kategori','Stok','Aksi'],db.books.map(b=>`<tr><td>${b.id}</td><td>${esc(b.judul)}</td><td>${esc(b.penulis)}</td><td>${esc(b.kategori)}</td><td>${b.stok}</td><td>${acts('books',b.id)}</td></tr>`),'Belum ada buku. Tambahkan buku pertama.');
+if(state.tab==='members')body=`<div class="row"><button class="btn" data-act="edit" data-id="members:">Tambah anggota</button></div>`+tbl(['ID','Nama','Kelas','Kontak','Aksi'],db.members.map(m=>`<tr><td>${m.id}</td><td>${esc(m.nama)}</td><td>${esc(m.kelas)}</td><td>${esc(m.kontak)}</td><td>${acts('members',m.id)}</td></tr>`),'Belum ada anggota. Tambahkan anggota pertama.');
+if(state.tab==='loans')body=tbl(['ID','Buku','Anggota','Pinjam','Status','Aksi'],db.loans.slice().reverse().map(l=>`<tr><td>${l.id}</td><td>${esc(bk(l.book).judul)}</td><td>${esc(mm(l.mem).nama)}</td><td>${fmtD(l.out)}</td><td>${badge(l)}</td><td><button class="btn sm danger" data-act="delLoan" data-id="${l.id}" data-confirm>Hapus</button></td></tr>`),'Belum ada transaksi.');
+if(state.tab==='data')body=`<div class="cols"><div class="panel"><h3>Database Excel</h3><p style="color:var(--muted);margin-top:0">Data tersimpan di peramban ini. Unduh sebagai file Excel (sheet Buku, Anggota, Transaksi) untuk cadangan, atau impor file dengan format yang sama.</p><div class="row"><button class="btn" data-act="xlsx">Unduh Excel</button><label class="btn alt" style="cursor:pointer;flex-direction:row">Impor Excel<input type="file" accept=".xlsx" id="imp" hidden></label></div><small style="color:var(--muted)">Impor mengganti seluruh data yang ada.</small></div>
+<div class="panel"><h3>Pengaturan</h3><div class="form"><label>PIN baru<input id="np" type="password" inputmode="numeric"></label><button class="btn alt" data-act="setpin">Simpan PIN</button></div><div class="row"><button class="btn danger" data-act="reset" data-confirm>Reset ke data contoh</button><button class="btn alt" data-act="logout">Keluar admin</button></div></div></div>`;
+return`<h2>Admin</h2><div class="tabs">${T.map(t=>`<button class="chip ${state.tab===t[0]?'on':''}" data-act="tab" data-id="${t[0]}">${t[1]}</button>`).join('')}</div>${body}`}};
+
+const acts=(e,id)=>`<button class="btn sm alt" data-act="edit" data-id="${e}:${id}">Ubah</button> <button class="btn sm danger" data-act="del" data-id="${e}:${id}" data-confirm>Hapus</button>`;
+function cards(){const q=state.q.toLowerCase(),r=db.books.filter(b=>(!state.cat||b.kategori===state.cat)&&[b.judul,b.penulis,b.kategori].join(' ').toLowerCase().includes(q));
+return r.length?`<div class="grid">${r.map(b=>{const a=avail(b);return`<button class="card" data-act="info" data-id="${b.id}"><strong>${esc(b.judul)}</strong><small>${esc(b.penulis)}</small><small>${esc(b.kategori)}</small><span class="badge ${a>0?'ok':'bad'}">${a>0?'Tersedia '+a+' dari '+b.stok:'Sedang dipinjam semua'}</span></button>`}).join('')}</div>`:empty('Buku tidak ditemukan. Coba kata kunci lain atau pilih semua kategori.')}
+function memRows(){const q=state.mq.toLowerCase();return tbl(['ID','Nama','Kelas','Kontak','Sedang dipinjam','Total pinjam'],db.members.filter(m=>(m.nama+' '+m.kelas).toLowerCase().includes(q)).map(m=>`<tr><td>${m.id}</td><td>${esc(m.nama)}</td><td>${esc(m.kelas)}</td><td>${esc(m.kontak)}</td><td>${db.loans.filter(l=>l.mem===m.id&&!l.ret).length}</td><td>${db.loans.filter(l=>l.mem===m.id).length}</td></tr>`),'Anggota tidak ditemukan.')}
+function actTable(btn){const a=db.loans.filter(l=>!l.ret);return tbl(['ID','Buku','Anggota','Jatuh tempo','Status','Denda',...(btn?['Aksi']:[])],a.map(l=>`<tr><td>${l.id}</td><td>${esc(bk(l.book).judul)}</td><td>${esc(mm(l.mem).nama)}</td><td>${fmtD(l.due)}</td><td>${badge(l)}</td><td>${rp(fine(l))}</td>${btn?`<td><button class="btn sm" data-act="return" data-id="${l.id}">Kembalikan</button></td>`:''}</tr>`),'Tidak ada buku yang sedang dipinjam.')}
+
+function render(){$('#nav').innerHTML=V.map(v=>`<button data-act="go" data-id="${v[0]}" class="${state.view===v[0]?'on':''}">${v[1]}</button>`).join('');$('#main').innerHTML=views[state.view]();const i=$('#imp');if(i)i.onchange=importXlsx}
+
+/* ---------- Aksi ---------- */
+const FIELDS={books:[['judul','Judul buku','text'],['penulis','Penulis','text'],['kategori','Kategori','text'],['tahun','Tahun terbit','number'],['stok','Jumlah eksemplar','number']],members:[['nama','Nama lengkap','text'],['kelas','Kelas','text'],['kontak','Kontak (HP)','text']]};
+const A={
+go(id){state.view=id;render();scrollTo(0,0)},
+gosearch(){state.q=$('#hq').value;state.cat='';state.view='katalog';render()},
+cat(id){state.cat=id;state.q='';state.view='katalog';render()},
+close(){$('#dlg').close()},
+info(id){const b=bk(id),a=avail(b);$('#dlg').innerHTML=`<h3>${esc(b.judul)}</h3><dl><dt>Penulis</dt><dd>${esc(b.penulis)}</dd><dt>Kategori</dt><dd>${esc(b.kategori)}</dd><dt>Tahun</dt><dd>${esc(b.tahun||'-')}</dd><dt>Kode</dt><dd>${b.id}</dd><dt>Ketersediaan</dt><dd><span class="badge ${a>0?'ok':'bad'}" style="margin:0">${a>0?'Tersedia '+a+' dari '+b.stok:'Dipinjam semua'}</span></dd></dl><div class="row">${a>0?`<button class="btn" data-act="preBorrow" data-id="${b.id}">Pinjam buku ini</button>`:''}<button class="btn alt" data-act="close">Tutup</button></div>`;$('#dlg').showModal()},
+preBorrow(id){state.pre=id;$('#dlg').close();A.go('pinjam')},
+pinjam(){const m=$('#pm').value,b=$('#pb').value,d=$('#pd').value;
+if(!m||!b)return toast('Pilih anggota dan buku terlebih dahulu.');
+if(!d||d<today())return toast('Jatuh tempo tidak boleh sebelum hari ini.');
+if(db.loans.filter(l=>l.mem===m&&!l.ret).length>=MAXPIN)return toast('Anggota sudah meminjam '+MAXPIN+' buku. Kembalikan salah satu dulu.');
+if(avail(bk(b))<1)return toast('Stok buku ini habis.');
+db.loans.push({id:nid(db.loans,'T'),book:b,mem:m,out:today(),due:d,ret:null});save();state.pre='';toast('Peminjaman dicatat.');render()},
+return(id){const l=db.loans.find(x=>x.id===id);l.ret=today();save();const f=fine(l);toast(f?'Buku dikembalikan. Denda '+rp(f)+'.':'Pengembalian dicatat.');render()},
+tab(id){state.tab=id;render()},
+login(){if($('#pin').value===db.pin){state.adm=true;render()}else toast('PIN salah. Coba lagi.')},
+logout(){state.adm=false;render()},
+setpin(){const v=$('#np').value.trim();if(v.length<4)return toast('PIN minimal 4 angka.');db.pin=v;save();toast('PIN disimpan.');render()},
+reset(){db=seed();save();toast('Data contoh dipulihkan.');render()},
+edit(id){const[e,i]=id.split(':'),o=i?db[e].find(x=>x.id===i):{};$('#dlg').dataset.e=e;$('#dlg').dataset.i=i;
+$('#dlg').innerHTML=`<h3>${i?'Ubah':'Tambah'} ${e==='books'?'buku':'anggota'}</h3><div class="form">${FIELDS[e].map(f=>`<label>${f[1]}<input name="${f[0]}" type="${f[2]}" value="${esc(o[f[0]]??'')}" ${f[2]==='number'?'min="0"':''}></label>`).join('')}</div><div class="row"><button class="btn" data-act="saveEdit">Simpan</button><button class="btn alt" data-act="close">Batal</button></div>`;$('#dlg').showModal()},
+saveEdit(){const d=$('#dlg'),e=d.dataset.e,i=d.dataset.i,v={};d.querySelectorAll('[name]').forEach(x=>v[x.name]=x.type==='number'?(x.value===''?'':+x.value):x.value.trim());
+const key=e==='books'?'judul':'nama';if(!v[key])return toast((e==='books'?'Judul':'Nama')+' wajib diisi.');
+if(e==='books'){v.kategori=v.kategori||'Umum';v.stok=v.stok===''?1:v.stok;if(i&&v.stok<active(i))return toast('Stok tidak boleh kurang dari jumlah yang sedang dipinjam ('+active(i)+').')}
+if(i)Object.assign(db[e].find(x=>x.id===i),v);else db[e].push({id:nid(db[e],e==='books'?'B':'A'),...v});
+save();d.close();toast('Data disimpan.');render()},
+del(id){const[e,i]=id.split(':');
+if(e==='books'&&active(i))return toast('Buku masih dipinjam. Tunggu sampai dikembalikan.');
+if(e==='members'&&db.loans.some(l=>l.mem===i&&!l.ret))return toast('Anggota masih meminjam buku.');
+db[e]=db[e].filter(x=>x.id!==i);save();toast('Data dihapus.');render()},
+delLoan(id){db.loans=db.loans.filter(l=>l.id!==id);save();toast('Transaksi dihapus.');render()},
+async xlsx(){const wb=XLSX.utils.book_new(),S=(n,r)=>XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(r),n);
+S('Buku',db.books.map(b=>({ID:b.id,Judul:b.judul,Penulis:b.penulis,Kategori:b.kategori,Tahun:b.tahun,Stok:b.stok,Tersedia:avail(b)})));
+S('Anggota',db.members.map(m=>({ID:m.id,Nama:m.nama,Kelas:m.kelas,Kontak:m.kontak})));
+S('Transaksi',db.loans.map(l=>({ID:l.id,'ID Buku':l.book,'Judul':bk(l.book).judul,'ID Anggota':l.mem,'Nama':mm(l.mem).nama,'Tgl Pinjam':l.out,'Jatuh Tempo':l.due,'Tgl Kembali':l.ret||'',Denda:fine(l)})));
+const buf=XLSX.write(wb,{bookType:'xlsx',type:'array'});
+try{const dl=window.claude?await window.claude.use('downloads'):null;if(!dl)return toast('Unduhan tidak tersedia di tampilan ini.');await dl.save({filename:'smart-library.xlsx',data:new Uint8Array(buf)})}catch(e){if(!e||e.code!=='declined')toast('Gagal mengunduh file.')}}
+};
+async function importXlsx(ev){const f=ev.target.files[0];if(!f)return;
+try{const wb=XLSX.read(await f.arrayBuffer()),R=n=>wb.Sheets[n]?XLSX.utils.sheet_to_json(wb.Sheets[n]):null,B=R('Buku'),M=R('Anggota'),T=R('Transaksi');
+if(!B||!M||!T)return toast('File harus punya sheet Buku, Anggota, dan Transaksi.');
+db.books=B.map(r=>({id:String(r.ID),judul:r.Judul||'',penulis:r.Penulis||'',kategori:r.Kategori||'Umum',tahun:+r.Tahun||'',stok:+r.Stok||1}));
+db.members=M.map(r=>({id:String(r.ID),nama:r.Nama||'',kelas:r.Kelas||'',kontak:String(r.Kontak||'')}));
+db.loans=T.map(r=>({id:String(r.ID),book:String(r['ID Buku']),mem:String(r['ID Anggota']),out:String(r['Tgl Pinjam']||''),due:String(r['Jatuh Tempo']||''),ret:r['Tgl Kembali']?String(r['Tgl Kembali']):null}));
+save();toast('Impor berhasil.');render()}catch(e){toast('File tidak bisa dibaca. Pastikan format .xlsx.')}}
+
+document.addEventListener('click',e=>{const el=e.target.closest('[data-act]');if(!el)return;
+if(el.dataset.confirm!==undefined&&!el.classList.contains('arm')){const t=el.textContent;el.classList.add('arm');el.textContent='Yakin?';setTimeout(()=>{el.classList.remove('arm');el.textContent=t},3000);return}
+A[el.dataset.act]?.(el.dataset.id,el)});
+document.addEventListener('keydown',e=>{if(e.key!=='Enter')return;if(e.target.id==='hq')A.gosearch();if(e.target.id==='pin')A.login()});
+db=load();render();
+</script>
+</body>
+</html>
